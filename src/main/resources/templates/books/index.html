@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+	<title>RecoBook</title>
+</head>
+
+<body>
+	<div class="books-index-wrapper" layout:fragment="contents">
+		<div class="container">
+			<div class="row" th:each="book : ${list}">
+				<div class="col-md-6 mx-auto">
+					<main>
+						<h2 class="author" th:text="${book.user.name}"></h2>
+						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${book.imageData}"
+							class="image" />
+						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${book.path}"
+							class="image" />
+						<pre class="title" th:text="${book.title}"></pre>
+						<pre class="writer" th:text="${book.writer}"></pre>
+						<pre class="description" th:text="${book.description}"></pre>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

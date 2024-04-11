@@ -10,7 +10,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.example.pictgram">
+	<logger name="com.example.RecoBook">
 		<level value="DEBUG" />
 	</logger>
 
