@@ -1,70 +1,59 @@
-DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS comments CASCADE;
+DROP TABLE IF EXISTS favorites CASCADE;
+DROP TABLE IF EXISTS books CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE IF NOT EXISTS users
+(
+   user_id SERIAL NOT NULL,
+   authority VARCHAR (255) NOT NULL,
+   name VARCHAR (255) NOT NULL,
+   password VARCHAR (255) NOT NULL,
+   username VARCHAR (255) NOT NULL,
+   created_at TIMESTAMP NOT NULL,
+   updated_at TIMESTAMP NOT NULL,
+   PRIMARY KEY (user_id)
+);
 CREATE TABLE IF NOT EXISTS books
 (
-   id varchar (255) NOT NULL,
-   author varchar (20) NULL,
-   title varchar (50) NULL,
-   explanation varchar (1000) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
+   id SERIAL NOT NULL,
+   user_id INT NOT NULL,
+   path VARCHAR (255) NOT NULL,
+   title VARCHAR (255) NOT NULL,
+   writer VARCHAR (255) NOT NULL,
+   description VARCHAR (1000) NOT NULL,
+   latitude VARCHAR (20),
+   longitude VARCHAR (20),
+   created_at TIMESTAMP NOT NULL,
+   updated_at TIMESTAMP NOT NULL,
    PRIMARY KEY (id)
 );
-DROP TABLE IF EXISTS User;
-CREATE TABLE IF NOT EXISTS User
+ALTER TABLE books ADD CONSTRAINT FK_users_books FOREIGN KEY (user_id) REFERENCES users;
+CREATE TABLE IF NOT EXISTS favorites
 (
-   id varchar (255) NOT NULL,
-   user_name varchar (20) NULL,
-   mail_address varchar (50) NULL,
-   password varchar (20) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
+   id SERIAL NOT NULL,
+   user_id INT NOT NULL,
+   book_id INT NOT NULL,
+   created_at TIMESTAMP NOT NULL,
+   updated_at TIMESTAMP NOT NULL,
    PRIMARY KEY (id)
 );
-DROP TABLE IF EXISTS books_finished_reading;
-CREATE TABLE IF NOT EXISTS books_finished_reading
+ALTER TABLE favorites ADD CONSTRAINT FK_favorites_users FOREIGN KEY (user_id) REFERENCES users;
+ALTER TABLE favorites ADD CONSTRAINT FK_favorites_books FOREIGN KEY (book_id) REFERENCES books;
+CREATE TABLE IF NOT EXISTS comments
 (
-   user_id varchar (200) NOT NULL,
-   book_id varchar (200) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
+   id SERIAL NOT NULL,
+   book_id INT NOT NULL,
+   description VARCHAR (1000) NOT NULL,
+   created_at TIMESTAMP NOT NULL,
+   updated_at TIMESTAMP NOT NULL,
    PRIMARY KEY (id)
 );
-DROP TABLE IF EXISTS recommend_books;
-CREATE TABLE IF NOT EXISTS recommend_books
-(
-   id varchar (255) NOT NULL,
-   user_id varchar (200) NULL,
-   read_book_id varchar (200) NULL,
-   recommend_book_id varchar (200) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
-   PRIMARY KEY (id)
-);
-DROP TABLE IF EXISTS review_books;
-CREATE TABLE IF NOT EXISTS review_books
-(
-   id varchar (255) NOT NULL,
-   user_id varchar (200) NULL,
-   book_id varchar (200) NULL,
-   content varchar (200) NULL,
-   star_count varchar (200) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
-   PRIMARY KEY (id)
-);
-DROP TABLE IF EXISTS like_books;
-CREATE TABLE IF NOT EXISTS like_books
-(
-   id varchar (255) NOT NULL,
-   user_id varchar (200) NULL,
-   book_id varchar (200) NULL,
-   deleted bool NOT NULL,
-   created_date timestamp NULL,
-   updated_date timestamp NULL,
-   PRIMARY KEY (id)
-);
+ALTER TABLE comments ADD CONSTRAINT FK_comments_books FOREIGN KEY (book_id) REFERENCES books;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO recobook;
+GRANT USAGE,
+SELECT ON ALL
+   SEQUENCES
+IN    SCHEMA
+   public
+   TO
+   recobook;
