@@ -13,38 +13,39 @@
 			<div class="row">
 				<div class="col-md-6 mx-auto">
 					<h1 class="text-center">本を登録する</h1>
-					<form class="new_book" id="new_book" method="post" th:action="@{/book}" th:object="${form}"
-						enctype="multipart/form-data">
-						<div layout:replace="~{layouts/common::messages}"></div>
-						<input type="hidden" th:field="*{id}" />
-						<div class="mb-3">
-							<label class="form-label text-black" for="book_title">タイトル</label>
-							<textarea class="form-control" th:field="*{title}" rows="10"
-								th:errorclass="error-field"></textarea>
-							<p th:if="${#fields.hasErrors('title')}" class="error-message"
-								th:errors="*{title}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-black" for="book_writer">著者</label>
-							<textarea class="form-control" th:field="*{writer}" rows="10"
-								th:errorclass="error-field"></textarea>
-							<p th:if="${#fields.hasErrors('writer')}" class="error-message"
-								th:errors="*{writer}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-black" for="book_image">画像</label>
-							<input type="file" class="form-control-file" th:field="*{image}" />
-							<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-black" for="book_description">説明</label>
-							<textarea class="form-control" th:field="*{description}" rows="10"
-								th:errorclass="error-field"></textarea>
-							<p th:if="${#fields.hasErrors('description')}" class="error-message"
-								th:errors="*{description}"></p>
-						</div>
-						<input type="submit" value="登録する" class="btn w-100 btn-outline-dark" />
-					</form>
+					<main>
+						<form class="new_book" id="new_book" method="post" th:action="@{/book}" th:object="${form}"
+							enctype="multipart/form-data">
+							<div layout:replace="~{layouts/common::messages}"></div>
+							<input type="hidden" th:field="*{id}" />
+							<div class="mb-3">
+								<label class="form-label text-black" for="book_title">タイトル</label>
+								<textarea class="form-control" th:field="*{title}" rows="10"
+									th:errorclass="error-field"></textarea>
+								<p th:if="${#fields.hasErrors('title')}" class="error-message" th:errors="*{title}"></p>
+							</div>
+							<div class="mb-3">
+								<label class="form-label text-black" for="book_writer">著者</label>
+								<textarea class="form-control" th:field="*{writer}" rows="10"
+									th:errorclass="error-field"></textarea>
+								<p th:if="${#fields.hasErrors('writer')}" class="error-message" th:errors="*{writer}">
+								</p>
+							</div>
+							<div class="mb-3">
+								<label class="form-label text-black" for="book_image">画像</label>
+								<input type="file" class="form-control-file" th:field="*{image}" />
+								<p th:if="${#fields.hasErrors('image')}" class="error-message" th:errors="*{image}"></p>
+							</div>
+							<div class="mb-3">
+								<label class="form-label text-black" for="book_description">説明</label>
+								<textarea class="form-control" th:field="*{description}" rows="10"
+									th:errorclass="error-field"></textarea>
+								<p th:if="${#fields.hasErrors('description')}" class="error-message"
+									th:errors="*{description}"></p>
+							</div>
+							<input type="submit" value="登録する" class="btn w-100 btn-outline-dark" />
+						</form>
+					</main>
 				</div>
 			</div>
 		</div>

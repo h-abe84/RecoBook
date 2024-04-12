@@ -9,10 +9,15 @@
 <body>
 	<div class="books-index-wrapper" layout:fragment="contents">
 		<div class="container">
+			<h1 class="text-center">読んだ本一覧</h1>
+			<div class="row">
+				<div class="col-md-6 mx-auto text-center">
+					<button onclick="location.href='/books/new'">本の追加</button>
+				</div>
+			</div>
 			<div class="row" th:each="book : ${list}">
 				<div class="col-md-6 mx-auto">
 					<main>
-						<h2 class="author" th:text="${book.user.name}"></h2>
 						<img src="" th:if="${@environment.getProperty('image.local')}" th:src="${book.imageData}"
 							class="image" />
 						<img src="" th:unless="${@environment.getProperty('image.local')}" th:src="${book.path}"

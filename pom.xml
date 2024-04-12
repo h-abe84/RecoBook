@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>com.example.RecoBook</groupId>
 	<artifactId>RecoBook</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RecoBook</name>
 	<description>RecoBook</description>
@@ -91,6 +92,14 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<version>3.2.3</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
